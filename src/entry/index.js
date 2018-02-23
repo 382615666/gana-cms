@@ -1,10 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.scss'
+
+import 'element-theme-default'
 
 class Login extends React.Component {
     render() {
-        return <div>index.js</div>
+        return (
+            <div className="login-box">
+
+            </div>
+        )
     }
 }
 

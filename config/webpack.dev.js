@@ -6,6 +6,9 @@ module.exports = merge(common, {
     devtool: 'inline-source-map',
     devServer: {
         contentBase: 'dist',
+        openPage: 'login.html',
+        overlay: true,
+        open: true,
         hot: true,
         port: 3333
     },

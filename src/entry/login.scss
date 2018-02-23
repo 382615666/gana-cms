@@ -1,0 +1,26 @@
+.login-dialog{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  &::after{
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 100%;
+    vertical-align: middle;
+  }
+  .login-box{
+    display: inline-block;
+    border-radius: 5px;
+    border: 1px solid #1d90e6;
+    padding: 10px 20px 20px;
+    vertical-align: middle;
+    .logo{
+      width: 100px;
+    }
+    .login-btn{
+      width: 100%;
+    }
+  }
+}
