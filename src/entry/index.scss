@@ -1,0 +1,38 @@
+html{
+  height: 100%;
+}
+body{
+  height: inherit;
+}
+.main{
+  height: inherit;
+}
+.main-content{
+  height: inherit;
+}
+.menu-box{
+  position: absolute;
+  height: 100%;
+  width: 200px;
+  background: #1668b2;
+  z-index: 1;
+}
+.content-box{
+  padding-left: 200px;
+  background: #f8f8f8;
+  height:inherit;
+  position: relative;
+  .header-info{
+    text-align: right;
+    background: #fff;
+  }
+  .content-wrap{
+    background: #fff;
+    position: absolute;
+    overflow-y: auto;
+    top: 60px;
+    left: 210px;
+    bottom: 10px;
+    right: 10px;
+  }
+}
