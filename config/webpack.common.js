@@ -41,10 +41,7 @@ module.exports = {
                 test: /\.js$/, // babel 转换为兼容性的 js
                 exclude: /node_modules/,
                 use: [{
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['react', 'latest']
-                    }
+                    loader: 'babel-loader'
                 }, {
                     loader: 'eslint-loader',
                     options: {
