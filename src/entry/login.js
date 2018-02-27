@@ -44,13 +44,10 @@ class Login extends React.Component {
         })
     }
     login = (e) => {
-        this.refs.login.validate(valid => {
+        this.refs.login.validate(async valid => {
             if (valid) {
-                axios
-                    .get(`/login/${this.state.form.accout}/${this.state.form.password}`)
-                    .then(res => {
+                let res = await axios.get(`/login/${this.state.form.account}/${this.state.form.password}`)
 
-                    })
             }
         })
     }
