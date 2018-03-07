@@ -8,6 +8,12 @@ import '../static/scss/reset'
 import './index.scss'
 import logo from '../static/svg/logo'
 
+import asyncComponent from '../app/component/test1'
+
+debugger
+const AsyncHome = asyncComponent(() => System.import("../app/component/test"));
+
+
 const routes = [
     { path: '/',
         exact: true,
@@ -23,11 +29,14 @@ const routes = [
         main: () => <h2>Shoelaces</h2>
     }
 ]
+
+
+
 class Index extends React.Component {
     constructor (props) {
         super(props)
     }
-    render() {
+    async render() {
         return (
             <BrowserRouter>
                 <div className="main-content">
@@ -36,7 +45,7 @@ class Index extends React.Component {
                         <Menu defaultActive="2" className="el-menu-vertical-demo">
                             <Menu.SubMenu index="1" title={<span><i className="el-icon-message"></i>导航一</span>}>
                                 <Menu.Item index="1-1">
-                                    <Link to="/bubblegum">选项2</Link>
+                                    <Link to="/">选项2</Link>
                                 </Menu.Item>
                                 <Menu.Item index="1-2">选项2</Menu.Item>
                                 <Menu.Item index="1-3">选项3</Menu.Item>
@@ -50,16 +59,7 @@ class Index extends React.Component {
                             aaaaaaa
                         </header>
                         <section className="content-wrap">
-                            {
-                                routes.map((route, index) =>(
-                                    <Route
-                                        key={index}
-                                        path={route.path}
-                                        exact={route.exact}
-                                        component={route.main}
-                                    />
-                                ))
-                            }
+                            <Route exact path="/" component={AsyncHome}/>
                         </section>
                     </div>
                 </div>
