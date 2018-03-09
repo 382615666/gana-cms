@@ -4,6 +4,7 @@
     "transform-class-properties",
     ["transform-runtime", {
       "regenerator": true
-    }]
+    }],
+    "syntax-dynamic-import"
   ]
 }

@@ -8,35 +8,24 @@ import '../static/scss/reset'
 import './index.scss'
 import logo from '../static/svg/logo'
 
-import asyncComponent from '../app/component/test1'
 
-debugger
-const AsyncHome = asyncComponent(() => System.import("../app/component/test"));
-
-
-const routes = [
-    { path: '/',
-        exact: true,
-        sidebar: () => <div>home!</div>,
-        main: () => <h2>Home</h2>
-    },
-    { path: '/bubblegum',
-        sidebar: () => <div>bubblegum!</div>,
-        main: () => <h2>Bubblegum</h2>
-    },
-    { path: '/shoelaces',
-        sidebar: () => <div>shoelaces!</div>,
-        main: () => <h2>Shoelaces</h2>
-    }
-]
-
-
+import getC from '../app/component/test1'
 
 class Index extends React.Component {
     constructor (props) {
         super(props)
+        this.state = {
+            Test: null
+        }
     }
-    async render() {
+    componentWillMount () {
+        const a = getC()
+        debugger
+        this.setState({
+            Test: a
+        })
+    }
+    render() {
         return (
             <BrowserRouter>
                 <div className="main-content">
@@ -45,7 +34,7 @@ class Index extends React.Component {
                         <Menu defaultActive="2" className="el-menu-vertical-demo">
                             <Menu.SubMenu index="1" title={<span><i className="el-icon-message"></i>导航一</span>}>
                                 <Menu.Item index="1-1">
-                                    <Link to="/">选项2</Link>
+                                    <Link to="/abc">选项2</Link>
                                 </Menu.Item>
                                 <Menu.Item index="1-2">选项2</Menu.Item>
                                 <Menu.Item index="1-3">选项3</Menu.Item>
@@ -59,7 +48,7 @@ class Index extends React.Component {
                             aaaaaaa
                         </header>
                         <section className="content-wrap">
-                            <Route exact path="/" component={AsyncHome}/>
+                            <Route exact path="/abc" component={this.state.Test}/>
                         </section>
                     </div>
                 </div>

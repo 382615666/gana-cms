@@ -1,30 +1,5 @@
-import React, { Component } from "react";
-
-export default function asyncComponent(importComponent) {
-    class AsyncComponent extends Component {
-        constructor(props) {
-            super(props);
-
-            this.state = {
-                component: null
-            };
-        }
-
-        async componentDidMount() {
-            debugger
-            const { default: component } = await importComponent();
-
-            this.setState({
-                component: component
-            });
-        }
-
-        render() {
-            const C = this.state.component;
-
-            return C ? <C {...this.props} /> : null;
-        }
-    }
-
-    return AsyncComponent;
+const getC = async (src) => {
+    const {default:component} = await import(src)
+    return component
 }
+export default getC
