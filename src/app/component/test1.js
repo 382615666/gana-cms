@@ -1,5 +1,6 @@
+const a = './test'
 const getC = async (src) => {
-    const {default:component} = await import(src)
+    const component = await import(a)
     return component
 }
 export default getC

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import {BrowserRouter, Route, Link} from 'react-router-dom'
+import {HashRouter as Router, Route, Link} from 'react-router-dom'
 import { Form, Input, Button, Menu } from 'element-react'
 
 import 'element-theme-default'
@@ -8,26 +8,15 @@ import '../static/scss/reset'
 import './index.scss'
 import logo from '../static/svg/logo'
 
-
-import getC from '../app/component/test1'
+import Test from '../app/route/test'
 
 class Index extends React.Component {
     constructor (props) {
         super(props)
-        this.state = {
-            Test: null
-        }
-    }
-    componentWillMount () {
-        const a = getC()
-        debugger
-        this.setState({
-            Test: a
-        })
     }
     render() {
         return (
-            <BrowserRouter>
+            <Router>
                 <div className="main-content">
                     <div className="menu-box">
                         <img src={logo} alt="" className="logo" style={{height:"150px"}}/>
@@ -48,12 +37,12 @@ class Index extends React.Component {
                             aaaaaaa
                         </header>
                         <section className="content-wrap">
-                            <Route exact path="/abc" component={this.state.Test}/>
+                            <Route exact path="/abc" component={Test}/>
                         </section>
                     </div>
                 </div>
 
-            </BrowserRouter>
+            </Router>
         )
     }
 }
