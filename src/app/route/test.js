@@ -1,18 +1,18 @@
 import React from 'react'
 import Loadable from 'react-loadable';
+import Loading from '../component/loading'
 
-function MyLoadingComponent() {
-    return <div>Loading...</div>;
-}
-
-const LoadableAnotherComponent = Loadable({
+const TestComponent = Loadable({
     loader: () => import('../component/test'),
-    loading: MyLoadingComponent
+    loading: Loading
 });
 
 export default class Test extends React.Component {
+    constructor (props) {
+        super(props)
+    }
     render() {
-        return <LoadableAnotherComponent/>;
+        return <TestComponent {...this.props}/>;
     }
 }
 
