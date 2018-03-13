@@ -5,11 +5,12 @@ import {HashRouter as Router, Route} from 'react-router-dom'
 import 'element-theme-default'
 import '../static/scss/reset'
 import './index.scss'
+import '../static/scss/common.scss'
 import logo from '../static/svg/logo'
 
 import Menus from '../app/menus/index'
 import Header from '../app/header/index'
-import Test from '../app/route/test'
+import Navigation from '../app/route/navigation'
 
 class Index extends React.Component {
     constructor (props) {
@@ -28,7 +29,7 @@ class Index extends React.Component {
                     <div className="content-box">
                         <Header></Header>
                         <section className="content-wrap">
-                            <Route exact path="/abc" component={Test}/>
+                            <Route exact path="/navigation" component={Navigation}/>
                         </section>
                     </div>
                 </div>

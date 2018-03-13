@@ -22,10 +22,6 @@ body{
   background: #f8f8f8;
   height:inherit;
   position: relative;
-  .header-info{
-    text-align: right;
-    background: #fff;
-  }
   .content-wrap{
     background: #fff;
     position: absolute;
@@ -34,5 +30,6 @@ body{
     left: 210px;
     bottom: 10px;
     right: 10px;
+    padding: 10px;
   }
 }

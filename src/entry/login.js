@@ -39,10 +39,8 @@ class Login extends React.Component {
         })
     }
     onChange = (value) => {
-        let obj = {}
-        obj[this.state.selectName] = value
         this.setState({
-            form: Object.assign({}, this.state.form, obj)
+            form: Object.assign({}, this.state.form, {[this.state.selectName]: value})
         })
     }
     login = (e) => {
