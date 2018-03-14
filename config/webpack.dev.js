@@ -11,11 +11,11 @@ module.exports = merge(common, {
         openPage: 'index.html',
         hot: true,
         port: 3333,
-        // proxy: {
-        //     "/": {
-        //         target: "http://127.0.0.1:8001"
-        //     }
-        // }
+        proxy: {
+            "/": {
+                target: "http://127.0.0.1:8001"
+            }
+        }
     },
     plugins: [
         new webpack.NamedModulesPlugin(),

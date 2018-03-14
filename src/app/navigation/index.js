@@ -5,6 +5,7 @@ export default class Navigation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            currentId: '',
             dialogVisible: false,
             addOrEditform: {},
             form: {
@@ -46,13 +47,9 @@ export default class Navigation extends React.Component {
             }]
         };
     }
-    onSubmit(e) {
-        e.preventDefault();
-        console.log('submit!');
-    }
     onChange(key, value) {
         this.setState({
-            form: Object.assign(this.state.form, { [key]: value })
+            addOrEditform: Object.assign(this.state.addOrEditform, { [key]: value })
         });
     }
     showDialog = () => {
@@ -66,10 +63,14 @@ export default class Navigation extends React.Component {
             addOrEditform: {}
         })
     }
+    addOrUpdate = () => {
+        console.log(this.state.addOrEditform)
+        this.closeDialog()
+    }
     render() {
         return (
             <div className="navigation-box">
-                <Form inline={true} model={this.state.form} onSubmit={this.onSubmit.bind(this)} className="demo-form-inline">
+                <Form inline={true} model={this.state.form} className="demo-form-inline">
                     <Form.Item>
                         <Input value={this.state.form.user} placeholder="审批人" onChange={this.onChange.bind(this, 'user')}></Input>
                     </Form.Item>
@@ -112,7 +113,7 @@ export default class Navigation extends React.Component {
                     </Dialog.Body>
                     <Dialog.Footer className="dialog-footer">
                         <Button onClick={this.closeDialog}>取消</Button>
-                        <Button type="primary" onClick={ () => this.setState({ dialogVisible: false }) }>确定</Button>
+                        <Button type="primary" onClick={this.addOrUpdate}>确定</Button>
                     </Dialog.Footer>
                 </Dialog>
             </div>

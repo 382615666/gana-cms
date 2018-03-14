@@ -48,7 +48,7 @@ class Login extends React.Component {
             if (valid) {
                 let res = await axios.get(`/login/${this.state.form.account}/${this.state.form.password}`)
                 if (!res.data.err) {
-                    window.location.href="/index.html"
+                    window.location.href="/admin/index"
                 }
             }
         })

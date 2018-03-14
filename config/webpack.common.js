@@ -25,6 +25,7 @@ files.forEach(fileName => {
 module.exports = {
     entry,
     output: {
+        publicPath: "/",
         filename: '[name].js?[hash:32]',
         path: path.resolve(__dirname, '../dist')
     },

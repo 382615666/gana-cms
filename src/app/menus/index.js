@@ -9,6 +9,7 @@ export default class Menus extends React.Component {
             <Menu defaultActive="1-1">
                 <Menu.SubMenu index="1" title={<span><i className="el-icon-message"></i>网站管理</span>}>
                     <Menu.Item index="1-1">
+                        <Link to="/admin/index" className="">首页</Link>
                         <Link to="/navigation" className="">导航管理</Link>
                     </Menu.Item>
                 </Menu.SubMenu>
