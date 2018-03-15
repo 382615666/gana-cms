@@ -8,9 +8,6 @@ const NavigationComponent = Loadable({
 });
 
 export default class Navigation extends React.Component {
-    constructor (props) {
-        super(props)
-    }
     render() {
         return <NavigationComponent {...this.props}/>;
     }

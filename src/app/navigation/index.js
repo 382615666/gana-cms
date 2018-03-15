@@ -1,13 +1,20 @@
 import React from 'react'
 import {Form, Input, Select, Button, Table, Pagination, Dialog} from 'element-react'
+import Server from './server'
 
 export default class Navigation extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             currentId: '',
-            dialogVisible: false,
-            addOrEditform: {},
+            addDialogVisible: false,
+            addForm: {},
+
+            rules: {
+                name: [
+                    { required: true, message: '请输入活动名称', trigger: 'blur' }
+                ],
+            },
             form: {
                 user: '',
                 region: ''
@@ -47,32 +54,34 @@ export default class Navigation extends React.Component {
             }]
         };
     }
-    onChange(key, value) {
+    onChange(formName, key, value) {
         this.setState({
-            addOrEditform: Object.assign(this.state.addOrEditform, { [key]: value })
+            [`${formName}Form`]: Object.assign(this.state[`${formName}Form`], { [key]: value })
         });
     }
-    showDialog = () => {
+    showAddDialog = () => {
         this.setState({
-            dialogVisible: true
+            addForm: {}
+        })
+        this.setState({
+            addDialogVisible: true
         })
     }
-    closeDialog = () => {
+    closeAddDialog = () => {
         this.setState({
-            dialogVisible: false,
-            addOrEditform: {}
+            addDialogVisible: false
         })
     }
-    addOrUpdate = () => {
-        console.log(this.state.addOrEditform)
-        this.closeDialog()
+    addSubmit = () => {
+        this.closeAddDialog()
+        Server.addSubmit()
     }
     render() {
         return (
             <div className="navigation-box">
                 <Form inline={true} model={this.state.form} className="demo-form-inline">
                     <Form.Item>
-                        <Input value={this.state.form.user} placeholder="审批人" onChange={this.onChange.bind(this, 'user')}></Input>
+                        <Input value={this.state.form.user} placeholder="导航名称" onChange={this.onChange.bind(this, 'user')}></Input>
                     </Form.Item>
                     <Form.Item>
                         <Select value={this.state.form.region} placeholder="活动区域">
@@ -84,7 +93,7 @@ export default class Navigation extends React.Component {
                         <Button nativeType="submit" type="primary">查询</Button>
                     </Form.Item>
                     <Form.Item>
-                        <Button type="primary" onClick={this.showDialog}>新增导航</Button>
+                        <Button type="primary" onClick={this.showAddDialog}>新增导航</Button>
                     </Form.Item>
                 </Form>
                 <Table
@@ -95,16 +104,17 @@ export default class Navigation extends React.Component {
                 <Pagination layout="total, sizes, prev, pager, next, jumper" total={400} pageSizes={[100, 200, 300, 400]} pageSize={100} currentPage={5}/>
                 <Dialog
                     title="新增导航"
-                    visible={ this.state.dialogVisible }
-                    onCancel={this.closeDialog}
+                    visible={ this.state.addDialogVisible }
+                    onCancel={this.closeAddDialog}
+                    size="tiny"
                 >
                     <Dialog.Body>
-                        <Form model={this.state.addOrEditform} labelWidth={100}>
+                        <Form model={this.state.addForm} labelWidth={100} rules={this.state.rules}>
                             <Form.Item label="导航名称" prop="name">
-                                <Input value={this.state.addOrEditform.name} onChange={this.onChange.bind(this, 'name')} autoComplete="off" />
+                                <Input value={this.state.addForm.name} onChange={this.onChange.bind(this, 'add', 'name')} autoComplete="off" />
                             </Form.Item>
                             <Form.Item label="导航级别" prop="rank">
-                                <Select value={this.state.addOrEditform.rank} placeholder="请选择导航级别" onChange={this.onChange.bind(this, 'rank')}>
+                                <Select value={this.state.addForm.rank} placeholder="请选择导航级别" onChange={this.onChange.bind(this, 'add', 'rank')}>
                                     <Select.Option label="一级导航" value="1"></Select.Option>
                                     <Select.Option label="二级导航" value="2"></Select.Option>
                                 </Select>
@@ -112,8 +122,8 @@ export default class Navigation extends React.Component {
                         </Form>
                     </Dialog.Body>
                     <Dialog.Footer className="dialog-footer">
-                        <Button onClick={this.closeDialog}>取消</Button>
-                        <Button type="primary" onClick={this.addOrUpdate}>确定</Button>
+                        <Button onClick={this.closeAddDialog}>取消</Button>
+                        <Button type="primary" onClick={this.addSubmit}>确定</Button>
                     </Dialog.Footer>
                 </Dialog>
             </div>
