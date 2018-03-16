@@ -38,6 +38,11 @@ export default class Navigation extends React.Component {
             data: []
         };
     }
+    componentWillMount () {
+        this.setState({
+            server: new Server()
+        })
+    }
     onChange(formName, key, value) {
         this.setState({
             [`${formName}Form`]: Object.assign(this.state[`${formName}Form`], { [key]: value })
@@ -45,9 +50,7 @@ export default class Navigation extends React.Component {
     }
     showAddDialog = () => {
         this.setState({
-            addForm: {}
-        })
-        this.setState({
+            addForm: {},
             addDialogVisible: true
         })
     }
@@ -58,7 +61,7 @@ export default class Navigation extends React.Component {
     }
     addSubmit = () => {
         this.closeAddDialog()
-        new Server().addSubmit()
+        this.state.server.addSubmit()
     }
     render() {
         return (
