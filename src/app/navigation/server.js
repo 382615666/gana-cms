@@ -1,7 +1,7 @@
-import server from '../util/server'
+import Ajax from '../util/server'
 
-export default class Server{
-    static addSubmit () {
-        return server.post('/admin/navigation', {test:11})
+export default class Server extends Ajax{
+    addSubmit () {
+        return this.post('/admin/navigation', {test:11})
     }
 }

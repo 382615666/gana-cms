@@ -1,16 +1,15 @@
 import axios from 'axios'
-export default class Server {
-    static async get (params) {
+export default class Ajax {
+    async get (params) {
         return await axios.get(...params)
     }
-    static async post (params) {
-        debugger
-        return await axios.post(...params)
+    async post (url, params) {
+        return await axios.post(url, params)
     }
-    static async put (params) {
+    async put (params) {
         return await axios.put(...params)
     }
-    static async delete (params) {
+    async delete (params) {
         return await axios.delete(...params)
     }
 }
