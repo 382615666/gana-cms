@@ -1,6 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {HashRouter as Router, Route} from 'react-router-dom'
+import {Message} from 'element-react'
+import axios from 'axios'
 
 import 'element-theme-default'
 import '../static/scss/reset'
@@ -11,6 +13,12 @@ import logo from '../static/svg/logo'
 import Menus from '../app/menus/index'
 import Header from '../app/header/index'
 import Navigation from '../app/route/navigation'
+
+axios.interceptors.response.use(response => {
+    if (response.status === 200 && response.data.err) {
+        Message.error(response.data.err)
+    }
+})
 
 class Index extends React.Component {
     constructor (props) {
