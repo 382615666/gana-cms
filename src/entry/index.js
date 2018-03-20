@@ -18,14 +18,10 @@ axios.interceptors.response.use(response => {
     if (response.status === 200 && response.data.err) {
         Message.error(response.data.err)
     }
+    return response
 })
 
 class Index extends React.Component {
-    constructor (props) {
-        super(props)
-    }
-    componentDidMount () {
-    }
     render() {
         return (
             <Router>

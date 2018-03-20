@@ -1,7 +1,13 @@
 import Ajax from '../util/server'
 
 export default class Server extends Ajax{
-    addSubmit () {
-        return this.post('/admin/navigation', {test:11})
+    add (params) {
+        return this.post('/admin/navigation', params)
+    }
+    getList (params) {
+        return this.get('/admin/navigation', params)
+    }
+    remove (id) {
+        return this.delete(`/admin/navigation/${id}`)
     }
 }
