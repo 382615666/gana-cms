@@ -10,4 +10,7 @@ export default class Server extends Ajax{
     remove (id) {
         return this.delete(`/admin/navigation/${id}`)
     }
+    edit (id, params) {
+        return this.put(`/admin/navigation/${id}`, params)
+    }
 }
