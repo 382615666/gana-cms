@@ -13,6 +13,7 @@ import logo from '../static/svg/logo'
 import Menus from '../app/menus/index'
 import Header from '../app/header/index'
 import Navigation from '../app/route/navigation'
+import Article from '../app/route/Article'
 
 axios.interceptors.response.use(response => {
     if (response.status === 200 && response.data.err) {
@@ -34,6 +35,7 @@ class Index extends React.Component {
                         <Header></Header>
                         <section className="content-wrap">
                             <Route exact path="/navigation" component={Navigation}/>
+                            <Route exact path="/article" component={Article}/>
                         </section>
                     </div>
                 </div>
