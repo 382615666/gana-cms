@@ -150,7 +150,7 @@ export default class Navigation extends React.Component {
     }
     render() {
         return (
-            <div className="navigation-box">
+            <div>
                 <Form inline={true} model={this.state.selectForm}>
                     <Form.Item>
                         <Input value={this.state.selectForm.name} placeholder="导航名称" onChange={this.onChange.bind(this, 'select', 'name')}></Input>
@@ -165,7 +165,7 @@ export default class Navigation extends React.Component {
                     <Form.Item>
                         <Button type="primary" onClick={this.select}>查询</Button>
                         <Button onClick={this.reset}>清空</Button>
-                        <Button type="primary" onClick={this.showAddDialog}>新增导航</Button>
+                        <Button type="primary" onClick={this.showAddDialog}>新增</Button>
                     </Form.Item>
                 </Form>
                 <Table

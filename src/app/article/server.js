@@ -7,6 +7,9 @@ export default class Server extends Ajax{
     getList (params) {
         return this.get('/admin/navigation', params)
     }
+    getNavigationAll (params) {
+        return this.get('/admin/navigationAll', params)
+    }
     remove (id) {
         return this.delete(`/admin/navigation/${id}`)
     }

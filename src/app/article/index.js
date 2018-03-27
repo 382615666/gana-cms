@@ -1,5 +1,5 @@
 import React from 'react'
-import {MessageBox, Form, Input, Select, Button, Table, Pagination, Dialog, Message} from 'element-react'
+import {MessageBox, Form, Input, Select, Button, Table, Pagination, Dialog, Message, DatePicker} from 'element-react'
 import Server from './server'
 
 export default class Article extends React.Component {
@@ -50,11 +50,13 @@ export default class Article extends React.Component {
                     }
                 }
             ],
+            navigations: [],
             ranks: ['全部', '一级导航', '二级导航']
         };
     }
     componentDidMount () {
         this.getList()
+        this.getNavigationAll()
     }
     getList = async () => {
         const {data} = await this.state.server.getList({
@@ -66,6 +68,14 @@ export default class Article extends React.Component {
         this.setState({
             data: data.data,
             total: data.page.total
+        })
+    }
+    getNavigationAll = async () => {
+        const {data} = await this.state.server.getNavigationAll({
+            rank: 2,
+        })
+        this.setState({
+            navigations: data.data,
         })
     }
     remove (row, index) {
@@ -150,22 +160,29 @@ export default class Article extends React.Component {
     }
     render() {
         return (
-            <div className="navigation-box">
+            <div>
                 <Form inline={true} model={this.state.selectForm}>
                     <Form.Item>
-                        <Input value={this.state.selectForm.name} placeholder="导航名称" onChange={this.onChange.bind(this, 'select', 'name')}></Input>
+                        <Input value={this.state.selectForm.title} placeholder="文章标题" onChange={this.onChange.bind(this, 'select', 'title')}></Input>
                     </Form.Item>
                     <Form.Item>
-                        <Select value={this.state.selectForm.rank} placeholder="导航级别" onChange={this.onChange.bind(this, 'select', 'rank')}>
-                            <Select.Option label={this.state.ranks[0]} value=""></Select.Option>
-                            <Select.Option label={this.state.ranks[1]} value="1"></Select.Option>
-                            <Select.Option label={this.state.ranks[2]} value="2"></Select.Option>
-                        </Select>
+                        <DatePicker
+                            value={this.state.selectForm.startDate}
+                            placeholder="选择开始日期"
+                            onChange={this.onChange.bind(this, 'select', 'startDate')}
+                        />
+                    </Form.Item>
+                    <Form.Item>
+                        <DatePicker
+                            value={this.state.selectForm.endDate}
+                            placeholder="选择结束日期"
+                            onChange={this.onChange.bind(this, 'select', 'endDate')}
+                        />
                     </Form.Item>
                     <Form.Item>
                         <Button type="primary" onClick={this.select}>查询</Button>
                         <Button onClick={this.reset}>清空</Button>
-                        <Button type="primary" onClick={this.showAddDialog}>新增导航</Button>
+                        <Button type="primary" onClick={this.showAddDialog}>新增</Button>
                     </Form.Item>
                 </Form>
                 <Table
@@ -186,17 +203,18 @@ export default class Article extends React.Component {
                     title="新增"
                     visible={ this.state.addDialogVisible }
                     onCancel={this.closeAddDialog}
-                    size="tiny"
+                    size="full"
                 >
                     <Dialog.Body>
                         <Form ref="addForm" model={this.state.addForm} labelWidth={100} rules={this.state.rules}>
-                            <Form.Item label="导航名称" prop="name">
-                                <Input value={this.state.addForm.name} onChange={this.onChange.bind(this, 'add', 'name')} autoComplete="off" />
+                            <Form.Item label="文章标题" prop="title">
+                                <Input value={this.state.addForm.title} onChange={this.onChange.bind(this, 'add', 'title')} autoComplete="off" />
                             </Form.Item>
-                            <Form.Item label="导航级别" prop="rank">
+                            <Form.Item label="所属导航" prop="rank">
                                 <Select value={this.state.addForm.rank} placeholder="请选择导航级别" onChange={this.onChange.bind(this, 'add', 'rank')}>
-                                    <Select.Option label="一级导航" value="1"></Select.Option>
-                                    <Select.Option label="二级导航" value="2"></Select.Option>
+                                    {
+                                        this.state.navigations.map(item => <Select.Option key={item._id} label={item.name} value={item._id}></Select.Option>)
+                                    }
                                 </Select>
                             </Form.Item>
                         </Form>
@@ -219,8 +237,9 @@ export default class Article extends React.Component {
                             </Form.Item>
                             <Form.Item label="导航级别" prop="rank">
                                 <Select value={this.state.editForm.rank} placeholder="请选择导航级别" onChange={this.onChange.bind(this, 'edit', 'rank')}>
-                                    <Select.Option label="一级导航" value="1"></Select.Option>
-                                    <Select.Option label="二级导航" value="2"></Select.Option>
+                                    {
+                                        this.state.navigations.map(item => <Select.Option key={item._id} label={item.name} value={item._id}></Select.Option>)
+                                    }
                                 </Select>
                             </Form.Item>
                         </Form>
